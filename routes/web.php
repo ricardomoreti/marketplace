@@ -9,7 +9,7 @@ Route::get('/', function(){
 
 Route::prefix('produtos')->group(function () {
     Route::get('/', [ProdutoController::class, 'index'])->name('produto.index');
-    Route::get('/adicionar', [ProdutoController::class, 'create'])->name('produto.create');
-    Route::post('/adicionar', [ProdutoController::class, 'store'])->name('produto.store');
-    Route::delete('/delete/{produto}', [ProdutoController::class, 'delete'])->name('produto.delete');
+    Route::get('/cadastrarProduto', [ProdutoController::class, 'cadastrarProduto'])->name('cadastrar.produto');
+    Route::post('/cadastrarProduto', [ProdutoController::class, 'cadastrarProduto'])->name('cadastrar.produto');
+    Route::delete('/delete', [ProdutoController::class, 'delete'])->name('produto.delete');
 });

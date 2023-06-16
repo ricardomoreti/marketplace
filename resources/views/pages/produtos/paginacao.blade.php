@@ -9,7 +9,7 @@
         <form action="{{ route('produto.index') }}" method="get">
             <input type="text" name="pesquisar" placeholder="Digite o nome" />
             <button> Pesquisar </button>
-            <a type="button" href="{{ route('produto.create') }}" class="btn btn-success float-end">Incluir Produto</a>
+            <a type="button" href="{{ route('cadastrar.produto') }}" class="btn btn-success float-end">Incluir Produto</a>
         </form>
 
         <div class="table-responsive mt-4">
@@ -32,12 +32,14 @@
                     <td>{{ $produto->nome }}</td>
                     <td>{{ 'R$' . ' ' . number_format($produto->valor, 2, ',', '.') }}</td>
                     <td>
-                        <a href="" class="btn btn-light btn-sm">Editar</a>
-                        <form action="{{ route('produto.delete', $produto->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</button>
-                        </form>
+                        <a href="" class="btn btn-light btn-sm">
+                            Editar
+                        </a>
+                        
+                        <meta name="csrf-token" content="{{ csrf_token() }}" />
+                        <a onclick="deleteRegistroPaginacao('{{ route('produto.delete') }}', {{ $produto->id }})" class="btn btn-danger btn-sm">
+                            Excluir
+                        </a>
                     </td>
                 </tr>
                 @endforeach

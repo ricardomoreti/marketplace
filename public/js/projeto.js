@@ -1,7 +1,7 @@
-function deleteRegistroPaginacao(rotaUrl, idDoRegistro) {
-    if (confirm('Deseja confirmar a exclusão?')) {
+function deleteRegistroPaginacao(rotaURL, idDoRegistro) {
+    if (confirm('Deseja confirmar a exclusão?')){
         $.ajax({
-            url: rotaUrl,
+            url: rotaURL,
             method: 'DELETE',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {
@@ -10,19 +10,20 @@ function deleteRegistroPaginacao(rotaUrl, idDoRegistro) {
             beforeSend: function () {
                 $.blockUI({
                     message: 'Carregando...',
-                    timeout: 2000
+                    timeout: 2000,
+
                 });
             },
         }).done(function (data) {
             $.unblockUI();
-            if (data.success == true) {
+            if (data.success = true) {
                 window.location.reload();
             } else {
-                alert('nao foi possivel excluir');
+                alert('Não foi possível excluir');
             }
         }).fail(function (data) {
             $.unblockUI();
-            alert('Nao foi possivel buscar os dados');
+            alert('Não foi possível buscar os ados');
         });
     }
 }

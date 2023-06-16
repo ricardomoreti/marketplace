@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormRequestProduto;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -20,12 +21,16 @@ class ProdutoController extends Controller
         return view('pages.produtos.paginacao', compact('findProduto'));
     }
 
-    public function create(Request $request )
+    public function cadastrarProduto(FormRequestProduto $request )
     {
         if($request->method() == "POST") {
-            //cria os dados
-        }
-        //senão cria uma tela na view
+            
+            $data = $request->only('nome', 'valor');
+            Produto::create($data);
+
+            return redirect()->route('produto.index');
+        } 
+
         return view('pages.produtos.create');
     }
 
@@ -44,11 +49,12 @@ class ProdutoController extends Controller
         //
     }
 
-    public function delete($produto)
+    public function delete(Request $request)
     {
-        $buscaRegistro = Produto::find($produto);
+        $id = $request->id;
+        $buscaRegistro = Produto::find($id);
         $buscaRegistro->delete();
 
-        return redirect()->route('produto.index');
+        return response()->json(['success' => true]);
     }
 }

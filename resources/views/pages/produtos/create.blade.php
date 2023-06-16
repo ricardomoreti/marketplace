@@ -6,15 +6,22 @@
     <h1 class="h2">Cadastrar Produto</h1>
 </div>
 
-<form>
+<form class="form" method="POST" action="{{ route('cadastrar.produto') }}">
+    @csrf
     <div class="form-row">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome" name="nome" />
+            <input type="text" class="form-control @error('nome') is-invalid @enderror" id="nome" name="nome" />
+            @if ($errors->has('nome'))
+                <div class="invalid-feedback"> {{ $errors->first('nome') }}</div>
+            @endif
           </div>
           <div class="mb-3">
             <label for="valor" class="form-label">Valor</label>
-            <input type="text" class="form-control" id="valor" name="valor" />
+            <input type="text" class="form-control @error('valor') is-invalid @enderror" id="valor" name="valor" />
+            @if ($errors->has('valor'))
+                <div class="invalid-feedback"> {{ $errors->first('valor') }}</div>
+            @endif
           </div>
           <button type="submit" class="btn btn-primary">Cadastrar</button>
   </form>
