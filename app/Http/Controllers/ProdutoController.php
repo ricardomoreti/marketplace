@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormRequestProduto;
 use App\Models\Componentes;
 use App\Models\Produto;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -31,6 +32,7 @@ class ProdutoController extends Controller
             $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
             Produto::create($data);
 
+            Toastr::success('Dados gravados com sucesso.');
             return redirect()->route('produto.index');
         }
 
