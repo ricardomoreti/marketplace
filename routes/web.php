@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-    return view('index');
+//Dashboard
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
+//Produtos
 Route::prefix('produtos')->group(function () {
     Route::get('/', [ProdutoController::class, 'index'])->name('produto.index');
     //Cadastro Create
@@ -17,4 +21,9 @@ Route::prefix('produtos')->group(function () {
     Route::put('/atualizarProduto/{id}', [ProdutoController::class, 'atualizarProduto'])->name('atualizar.produto');
     //Deletar 
     Route::delete('/delete', [ProdutoController::class, 'delete'])->name('produto.delete');
+});
+
+//Usuários
+Route::prefix('usuarios')->group(function () {
+    Route::get('/', [UsuarioController::class, 'index'])->name('usuario.index');
 });
