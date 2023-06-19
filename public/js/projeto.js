@@ -1,3 +1,4 @@
+//função de excluir utilizando ajax e efeito blockUI
 function deleteRegistroPaginacao(rotaURL, idDoRegistro) {
     if (confirm('Deseja confirmar a exclusão?')){
         $.ajax({
@@ -28,4 +29,5 @@ function deleteRegistroPaginacao(rotaURL, idDoRegistro) {
     }
 }
 
+//Máscara para o campo de valor/preço
 $('#mascara_valor').mask('#.##0,00', { reverse:true });

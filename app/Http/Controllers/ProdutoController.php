@@ -74,7 +74,7 @@ class ProdutoController extends Controller
         $buscaRegistro = Produto::find($id);
         $buscaRegistro->delete();
 
-        Toastr::info('Produto excluído com sucesso.');
+        Toastr::info('Excluído com sucesso.');
         return response()->json(['success' => true]);
     }
 }
