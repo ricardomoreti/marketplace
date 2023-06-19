@@ -15,16 +15,16 @@
             </div>
           </div>
         </div>
-        <!--
+        
         <div class="col-sm-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Clientes Cadastrados</h5>
-              <p class="card-text">Total de clientes cadastrados no sistema</p>
-              <a href="#" class="btn btn-primary">#</a>
+              <h5 class="card-title">Usuários Cadastrados</h5>
+              <p class="card-text">Total de usuários cadastrados no sistema</p>
+              <a href="{{ route('usuario.index') }}" class="btn btn-primary">{{ 'Total: ' .$totalDeUsuarioCadastrado }}</a>
             </div>
           </div>
         </div>
-        -->
+        
       </div>
 @endsection

@@ -24,6 +24,13 @@
                 <div class="invalid-feedback"> {{ $errors->first('email') }}</div>
             @endif
         </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Nova Senha</label>
+            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" />
+            @if ($errors->has('password'))
+                <div class="invalid-feedback"> {{ $errors->first('password') }}</div>
+            @endif
+        </div>
         <button type="submit" class="btn btn-primary">GRAVAR</button>
   </form>
 @endsection

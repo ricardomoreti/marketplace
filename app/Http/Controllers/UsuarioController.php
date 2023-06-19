@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormRequestUsuario;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -21,11 +23,12 @@ class UsuarioController extends Controller
         return view('pages.usuarios.paginacao', compact('findUsuario'));
     }
 
-    public function cadastrarUsuario(Request $request)
+    public function cadastrarUsuario(FormRequestUsuario $request)
     {
         if($request->method() == "POST") {
             //cria os dados
-            $data = $request->only('nome', 'valor');
+            $data = $request->all();
+            $data['password'] = Hash::make($data['password']);
             User::create($data);
 
             Toastr::success('Dados gravados com sucesso.');
@@ -36,11 +39,12 @@ class UsuarioController extends Controller
         return view('pages.usuarios.create');
     }
 
-    public function atualizarUsuario(Request $request, $id)
+    public function atualizarUsuario(FormRequestUsuario $request, $id)
     {
         if ($request->method() == "PUT") {
             // atualiza os dados
             $data = $request->all();
+            $data['password'] = Hash::make($data['password']);
 
             $buscaRegistro = User::find($id);
             $buscaRegistro->update($data);
