@@ -19,7 +19,12 @@ class Produto extends Model
         'calcado_material_externo',
         'calcado_material_interno',
         'calcado_material_solado',
-        'calcado_tipo_fechamento'
+        'calcado_tipo_fechamento',
+        'ncm',
+        'peso',
+        'largura',
+        'altura',
+        'comprimento'
     ];
 
     public function getProdutosPesquisarIndex(string $search = '')

@@ -20,7 +20,12 @@ class ProdutosSeeder extends Seeder
             'calcado_material_externo' => 'Couro Sintético',
             'calcado_material_interno' => 'Têxtil',
             'calcado_material_solado' => 'TR',
-            'calcado_tipo_fechamento' => 'Cadarço'
+            'calcado_tipo_fechamento' => 'Cadarço',
+            'ncm' => '6404.20.00',
+            'peso' => '1.00',
+            'largura' => '33.5',
+            'altura' => '12.0',
+            'comprimento' => '19.0'
         ]);
     }
 }

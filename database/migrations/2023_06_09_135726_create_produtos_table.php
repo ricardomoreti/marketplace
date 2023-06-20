@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string('calcado_material_interno')->nullable();
             $table->string('calcado_material_solado')->nullable();
             $table->string('calcado_tipo_fechamento')->nullable();
+            $table->string('ncm')->nullable();
+            $table->decimal('peso', 8, 3)->nullable();
+            $table->decimal('largura', 8, 3)->nullable();
+            $table->decimal('altura', 8, 3)->nullable();
+            $table->decimal('comprimento', 8, 3)->nullable();
             $table->timestamps();
         });
     }

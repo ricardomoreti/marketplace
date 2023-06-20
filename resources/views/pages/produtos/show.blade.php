@@ -21,6 +21,8 @@
       <p class="card-text">{{ 'Material Interno em ' . $produto->calcado_material_interno }}</p>
       <p class="card-text">{{ 'Material do Solado em ' . $produto->calcado_material_solado }}</p>
       <p class="card-text">{{ 'Tipo de Fechamento em ' . $produto->calcado_tipo_fechamento }}</p>
+      <p class="card-text">{{ 'NCM ' . $produto->ncm }}</p>
+      <p class="card-text">{{ 'Peso | LxAxC =>' . $produto->peso . 'kg | ' . $produto->largura . 'x' . $produto->altura . 'x' . $produto->altura }}</p>
       <a href="{{ route('atualizar.produto', $produto->id) }}" class="card-link">Editar</a>
     </div>
 </div>
