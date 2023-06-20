@@ -10,8 +10,12 @@ class Produto extends Model
     use HasFactory;
 
     protected $fillable = [
+        'sku',
         'nome',
-        'valor'
+        'preco',
+        'marca',
+        'genero',
+        'descricao'
     ];
 
     public function getProdutosPesquisarIndex(string $search = '')

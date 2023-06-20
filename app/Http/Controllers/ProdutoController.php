@@ -27,9 +27,9 @@ class ProdutoController extends Controller
     {
         if($request->method() == "POST") {
             //cria os dados
-            $data = $request->only('nome', 'valor');
+            $data = $request->all();
             $componentes = new Componentes();
-            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
+            $data['preco'] = $componentes->formatacaoMascaraDinheiroDecimal($data['preco']);
             Produto::create($data);
 
             Toastr::success('Dados gravados com sucesso.');
@@ -46,7 +46,7 @@ class ProdutoController extends Controller
             // atualiza os dados
             $data = $request->all();
             $componentes = new Componentes();
-            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
+            $data['preco'] = $componentes->formatacaoMascaraDinheiroDecimal($data['preco']);
 
             $buscaRegistro = Produto::find($id);
             $buscaRegistro->update($data);
@@ -64,7 +64,9 @@ class ProdutoController extends Controller
 
     public function show(string $id)
     {
-        //
+        $produto = Produto::find($id);
+
+        return view('pages.produtos.show', compact('produto'));
     }
 
 

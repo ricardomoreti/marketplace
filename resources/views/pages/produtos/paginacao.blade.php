@@ -19,9 +19,10 @@
             <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Cód.</th>
+                    <th>SKU</th>
                     <th>Nome</th>
-                    <th>Valor</th>
+                    <th>Preço</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -29,9 +30,14 @@
                 @foreach ($findProduto as $produto)
                 <tr>
                     <td>{{ $produto->id }}</td>
+                    <td>{{ $produto->sku }}</td>
                     <td>{{ $produto->nome }}</td>
-                    <td>{{ 'R$' . ' ' . number_format($produto->valor, 2, ',', '.') }}</td>
+                    <td>{{ 'R$' . ' ' . number_format($produto->preco, 2, ',', '.') }}</td>
                     <td>
+                        <a href="{{ route('visualizar.produto', $produto->id) }}" class="btn btn-warning btn-sm">
+                            Ver
+                        </a>
+
                         <a href="{{ route('atualizar.produto', $produto->id) }}" class="btn btn-light btn-sm">
                             Editar
                         </a>

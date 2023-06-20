@@ -10,8 +10,12 @@ return new class extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
+            $table->string('sku');
             $table->string('nome');
-            $table->decimal('valor', 10, 2);
+            $table->decimal('preco', 10, 2);
+            $table->string('marca');
+            $table->string('genero');
+            $table->longText('descricao');
             $table->timestamps();
         });
     }
