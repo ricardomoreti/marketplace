@@ -63,6 +63,37 @@
             <label for="descricao">Descrição</label>
         </div>
 
+        <div class="mb-3">
+            <label for="calcado_material_externo" class="form-label">Material Externo</label>
+            <input type="text" value="{{ isset($findProduto->calcado_material_externo) ? $findProduto->calcado_material_externo : old('calcado_material_externo') }}" class="form-control @error('calcado_material_externo') is-invalid @enderror" id="calcado_material_externo" name="calcado_material_externo" />
+            @if ($errors->has('calcado_material_externo'))
+                <div class="invalid-feedback"> {{ $errors->first('calcado_material_externo') }}</div>
+            @endif
+        </div>
+
+        <div class="mb-3">
+            <label for="calcado_material_interno" class="form-label">Material Interno</label>
+            <input type="text" value="{{ isset($findProduto->calcado_material_interno) ? $findProduto->calcado_material_interno : old('calcado_material_interno') }}" class="form-control @error('calcado_material_interno') is-invalid @enderror" id="calcado_material_interno" name="calcado_material_interno" />
+            @if ($errors->has('calcado_material_interno'))
+                <div class="invalid-feedback"> {{ $errors->first('calcado_material_interno') }}</div>
+            @endif
+        </div>
+
+        <div class="mb-3">
+            <label for="calcado_material_solado" class="form-label">Material do Solado</label>
+            <input type="text" value="{{ isset($findProduto->calcado_material_solado) ? $findProduto->calcado_material_solado : old('calcado_material_solado') }}" class="form-control @error('calcado_material_solado') is-invalid @enderror" id="calcado_material_solado" name="calcado_material_solado" />
+            @if ($errors->has('calcado_material_solado'))
+                <div class="invalid-feedback"> {{ $errors->first('calcado_material_solado') }}</div>
+            @endif
+        </div>
+        
+        <div class="mb-3">
+            <label for="calcado_tipo_fechamento" class="form-label">Tipo de Fechamento</label>
+            <input type="text" value="{{ isset($findProduto->calcado_tipo_fechamento) ? $findProduto->calcado_tipo_fechamento : old('calcado_tipo_fechamento') }}" class="form-control @error('calcado_tipo_fechamento') is-invalid @enderror" id="calcado_tipo_fechamento" name="calcado_tipo_fechamento" />
+            @if ($errors->has('calcado_tipo_fechamento'))
+                <div class="invalid-feedback"> {{ $errors->first('calcado_tipo_fechamento') }}</div>
+            @endif
+        </div>
         <button type="submit" class="btn btn-primary">GRAVAR</button>
     </div>
   </form>

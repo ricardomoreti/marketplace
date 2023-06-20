@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('marca');
             $table->string('genero');
             $table->longText('descricao');
+            $table->string('calcado_material_externo')->nullable();
+            $table->string('calcado_material_interno')->nullable();
+            $table->string('calcado_material_solado')->nullable();
+            $table->string('calcado_tipo_fechamento')->nullable();
             $table->timestamps();
         });
     }

@@ -15,8 +15,12 @@ class ProdutosSeeder extends Seeder
             'nome' => 'Sapato Oxford Masculino',
             'preco' => '89.90',
             'marca' => 'Polo Plus',
-            'genero' => 'Masculino',
-            'descricao' => 'Sapato oxford social masculino em couro sintético marca Polo Plus.'
+            'genero' => 'masculino',
+            'descricao' => 'Sapato oxford social masculino em couro sintético marca Polo Plus.',
+            'calcado_material_externo' => 'Couro Sintético',
+            'calcado_material_interno' => 'Têxtil',
+            'calcado_material_solado' => 'TR',
+            'calcado_tipo_fechamento' => 'Cadarço'
         ]);
     }
 }

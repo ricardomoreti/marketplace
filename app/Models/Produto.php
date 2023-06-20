@@ -15,7 +15,11 @@ class Produto extends Model
         'preco',
         'marca',
         'genero',
-        'descricao'
+        'descricao',
+        'calcado_material_externo',
+        'calcado_material_interno',
+        'calcado_material_solado',
+        'calcado_tipo_fechamento'
     ];
 
     public function getProdutosPesquisarIndex(string $search = '')
