@@ -6,7 +6,7 @@
     <h1 class="h2">Cadastrar Produto</h1>
 </div>
 
-<form class="form" method="POST" action="{{ route('cadastrar.produto') }}">
+<form class="form" method="POST" enctype="multipart/form-data" action="{{ route('cadastrar.produto') }}">
     @csrf
     <div class="form-row">
         <div class="mb-3">
@@ -131,6 +131,14 @@
                 <div class="invalid-feedback"> {{ $errors->first('comprimento') }}</div>
               @endif
             </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="fotos" class="form-label">Fotos</label>
+            <input type="file" name="fotos[]" placeholder="Selecione as fotos do produto" id="fotos" multiple />
+            @if ($errors->has('fotos'))
+                <div class="invalid-feedback"> {{ $errors->first('fotos') }}</div>
+            @endif
         </div>
 
         <button type="submit" class="btn btn-primary">GRAVAR</button>

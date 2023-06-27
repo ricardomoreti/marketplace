@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormRequestProduto;
 use App\Models\Componentes;
 use App\Models\Produto;
+use App\Models\ProdutoFoto;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,38 @@ class ProdutoController extends Controller
         if($request->method() == "POST") {
             //cria os dados
             $data = $request->all();
+            
             $componentes = new Componentes();
             $data['preco'] = $componentes->formatacaoMascaraDinheiroDecimal($data['preco']);
-            Produto::create($data);
+            $produto = Produto::create($data);
+
+            //fotos
+            $validatedData = $request->validate([
+                'fotos' => 'required',
+                'fotos' => 'image',
+                'fotos' => 'max:2048',
+                'fotos.*' => 'mimes:png,jpg,jpeg,gif,svg'
+            ]);
+
+            $totalFiles = count($request->file('fotos'));
+            $files = $request->file('fotos');
+
+            if($totalFiles > 0)
+            {
+                for ($x=0; $x<$totalFiles; $x++)
+                {
+                    $foto = new ProdutoFoto();
+                    
+                    $file = $files[$x];
+                    $foto->produto_id = $produto->id;
+                    $foto->nome = $file->getClientOriginalName();
+                    $foto->path = $file->store('public/fotos');
+
+                    $foto->save();
+
+                    //ProdutoFoto::create($foto);
+                }
+            }
 
             Toastr::success('Dados gravados com sucesso.');
             return redirect()->route('produto.index');

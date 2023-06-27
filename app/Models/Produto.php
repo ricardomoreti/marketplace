@@ -38,4 +38,9 @@ class Produto extends Model
 
         return $produto;
     }
+
+    public function fotos()
+    {
+        return $this->hasMany('App\ProdutoFoto');
+    }
 }
