@@ -139,6 +139,36 @@
                 <div class="invalid-feedback"> {{ $errors->first('comprimento') }}</div>
               @endif
             </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Fotos</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach ($findProduto->fotos as $fotos)
+                        @php 
+                            $fotoPath = str_replace('public/', '', $fotos->path);
+                            $fotoOriginalName = $fotos->nome;
+                        @endphp
+                        <tr>
+                        <td class="align-middle">
+                            <img src="{{ asset("storage/{$fotoPath}") }}" alt="{{ $fotoOriginalName }}" class="img-thumbnail" style="width: 150px; height: 150px;"/>
+                        </td>
+
+                        <td class="align-middle">
+                            <form method="POST" action="{{ route('produtofoto.delete', $fotos->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm ('Tem certeza que deseja excluir esta foto?')">Excluir Foto</button>
+                            </form>
+                        </td>
+                        @endforeach
+                        </tr>
+                </tbody>
+            </table>
         </div>
         <button type="submit" class="btn btn-primary">GRAVAR</button>
     </div>

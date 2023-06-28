@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProdutoFotoController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::prefix('produtos')->group(function () {
     Route::put('/atualizarProduto/{id}', [ProdutoController::class, 'atualizarProduto'])->name('atualizar.produto');
     //Deletar 
     Route::delete('/delete/{id}', [ProdutoController::class, 'delete'])->name('produto.delete');
+    Route::delete('/deleteFoto/{id}', [ProdutoFotoController::class, 'delete'])->name('produtofoto.delete');
     //Visualizar
     Route::get('/produto/{id}', [ProdutoController::class, 'show'])->name('visualizar.produto');
 });
