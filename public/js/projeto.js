@@ -24,7 +24,7 @@ function deleteRegistroPaginacao(rotaURL, idDoRegistro) {
             }
         }).fail(function (data) {
             $.unblockUI();
-            alert('Não foi possível buscar os ados');
+            alert('Não foi possível buscar os dados');
         });
     }
 }

@@ -20,7 +20,7 @@ Route::prefix('produtos')->group(function () {
     Route::get('/atualizarProduto/{id}', [ProdutoController::class, 'atualizarProduto'])->name('atualizar.produto');
     Route::put('/atualizarProduto/{id}', [ProdutoController::class, 'atualizarProduto'])->name('atualizar.produto');
     //Deletar 
-    Route::delete('/delete', [ProdutoController::class, 'delete'])->name('produto.delete');
+    Route::delete('/delete/{id}', [ProdutoController::class, 'delete'])->name('produto.delete');
     //Visualizar
     Route::get('/produto/{id}', [ProdutoController::class, 'show'])->name('visualizar.produto');
 });

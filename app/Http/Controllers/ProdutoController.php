@@ -8,6 +8,7 @@ use App\Models\Produto;
 use App\Models\ProdutoFoto;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
 {
@@ -30,21 +31,23 @@ class ProdutoController extends Controller
             //cria os dados
             $data = $request->all();
             
+            //valida o preço com a mascara
             $componentes = new Componentes();
             $data['preco'] = $componentes->formatacaoMascaraDinheiroDecimal($data['preco']);
+            //gravar o produto
             $produto = Produto::create($data);
-
-            //fotos
+            //valida as fotos
             $validatedData = $request->validate([
                 'fotos' => 'required',
                 'fotos' => 'image',
                 'fotos' => 'max:2048',
                 'fotos.*' => 'mimes:png,jpg,jpeg,gif,svg'
             ]);
-
+            
             $totalFiles = count($request->file('fotos'));
             $files = $request->file('fotos');
 
+            //lê as fotos enviadas e grava
             if($totalFiles > 0)
             {
                 for ($x=0; $x<$totalFiles; $x++)
@@ -57,15 +60,12 @@ class ProdutoController extends Controller
                     $foto->path = $file->store('public/fotos');
 
                     $foto->save();
-
-                    //ProdutoFoto::create($foto);
                 }
             }
-
+            //retorna a listagem de produtos
             Toastr::success('Dados gravados com sucesso.');
             return redirect()->route('produto.index');
         }
-
         //mostrar os dados
         return view('pages.produtos.create');
     }
@@ -102,11 +102,25 @@ class ProdutoController extends Controller
 
     public function delete(Request $request)
     {
+        $produto = new Produto;
+
         $id = $request->id;
         $buscaRegistro = Produto::find($id);
-        $buscaRegistro->delete();
+        $produto = $buscaRegistro;
 
-        Toastr::info('Excluído com sucesso.');
-        return response()->json(['success' => true]);
+        if(sizeof($produto->fotos) > 0) {
+            foreach ($produto->fotos as $fotos) {
+                $fotoPath = str_replace('public/', '', $fotos->path);
+
+                if (Storage::disk('public')->exists($fotoPath)){
+                    Storage::disk('public')->delete($fotoPath);
+                }
+            }
+        }
+        
+        if($buscaRegistro->delete()==true) {
+            Toastr::info('Excluído com sucesso.');
+            return  redirect()->route('produto.index');
+        }
     }
 }

@@ -17,6 +17,6 @@ class ProdutoFoto extends Model
 
     public function produto()
     {
-        return $this->belongsTo('App\Produto');
+        return $this->belongsTo(Produto::class);
     }
 }

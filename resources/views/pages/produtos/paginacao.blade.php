@@ -14,12 +14,13 @@
 
         <div class="table-responsive mt-4">
             @if ($findProduto->isEmpty())
-                <p>Não existe dados</p>
+                <h2>Nenhum produto encontrado</h2>
             @else
             <table class="table table-striped table-sm">
             <thead>
                 <tr>
                     <th>Cód.</th>
+                    <th>Foto</th>
                     <th>SKU</th>
                     <th>Nome</th>
                     <th>Preço</th>
@@ -29,11 +30,19 @@
             <tbody>
                 @foreach ($findProduto as $produto)
                 <tr>
-                    <td>{{ $produto->id }}</td>
-                    <td>{{ $produto->sku }}</td>
-                    <td>{{ $produto->nome }}</td>
-                    <td>{{ 'R$' . ' ' . number_format($produto->preco, 2, ',', '.') }}</td>
-                    <td>
+                    <td class="align-middle">{{ $produto->id }}</td>
+                    <td class="align-middle">
+                        @if (sizeof($produto->fotos)>0)
+                            @php 
+                                $fotoPath = str_replace('public/', '', $produto->fotos[0]->path);
+                            @endphp
+                            <img src="{{ 'storage/' . $fotoPath }}" alt="{{ $produto->fotos[0]->nome }}" class="img-thumbnail" style="height: 75px; width: 75px;" />
+                        @endif
+                    </td>
+                    <td class="align-middle">{{ $produto->sku }}</td>
+                    <td class="align-middle">{{ $produto->nome }}</td>
+                    <td class="align-middle">{{ 'R$' . ' ' . number_format($produto->preco, 2, ',', '.') }}</td>
+                    <td class="align-middle">
                         <a href="{{ route('visualizar.produto', $produto->id) }}" class="btn btn-warning btn-sm">
                             Ver
                         </a>
@@ -42,10 +51,11 @@
                             Editar
                         </a>
                         
-                        <meta name="csrf-token" content="{{ csrf_token() }}" />
-                        <a onclick="deleteRegistroPaginacao('{{ route('produto.delete') }}', {{ $produto->id }})" class="btn btn-danger btn-sm">
-                            Excluir
-                        </a>
+                        <form action="{{ route('produto.delete', $produto->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm ('Tem certeza que deseja excluir este produto?')">Excluir</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
